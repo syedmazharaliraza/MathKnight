@@ -126,6 +126,7 @@ body, html {
 
 .play-button span {
     position: absolute;
+    font-family: 'Rancho', cursive;
     font-size: 4rem;
     color: #2e4462;
     left: 55%;
