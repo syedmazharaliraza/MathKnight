@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', (e) => {
     let splash = document.querySelector('.splash-screen');
     setTimeout(() => {
         splash.style.display = "none";
-    }, 3000);
+    }, 4000);
 });
 
 // Starting game on clicking play button
