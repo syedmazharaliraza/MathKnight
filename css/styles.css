@@ -32,10 +32,16 @@ body, html {
     height: 0.5rem;
     width: 0rem;
     background-color: rgb(0, 183, 255);
-    animation: loading 4s ease-in-out forwards;
+    animation: loading 6s ease-in-out forwards;
 }
 
 @keyframes loading {
+    30% {
+        width: 2rem;
+    }
+    40% {
+        width: 2rem;
+    }
     50% {
         width: 3.6rem;
     }
