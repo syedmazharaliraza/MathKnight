@@ -1,0 +1,302 @@
+body, html {
+    width: 100%;
+    height: 100vh;
+    margin: 0%;
+    padding: 0%;
+    background-image: url('/Images/backgroundimage.jpg');
+}
+
+/* Splash Screen */
+
+.splash-screen {
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    display: block;
+    position: absolute;
+    z-index: 100;
+}
+
+.loading-bar {
+    height: 0.5rem;
+    width: 7.2rem;
+    border: 0.05rem white solid;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    padding: 0.15rem;
+}
+
+.loading-bar-content {
+    height: 0.5rem;
+    width: 0rem;
+    background-color: rgb(0, 183, 255);
+    animation: loading 3s ease-in-out forwards;
+}
+
+@keyframes loading {
+    50% {
+        width: 3.6rem;
+    }
+    70% {
+        width: 3.6rem;
+    }
+    75% {
+        width: 5rem;
+    }
+    80% {
+        width: 5rem;
+    }
+    90% {
+        width: 7.2rem;
+    }
+    100% {
+        width: 7.2rem;
+    }
+}
+
+/* Main container */
+
+.main-container {
+    position: relative;
+    width: 95%;
+    height: 100%;
+    margin: auto;
+    overflow: hidden;
+}
+
+.background {
+    position: absolute;
+    width: 1200px;
+    height: 600px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-image: url("/Images/background.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    border: 5px groove white;
+}
+
+.title {
+    position: absolute;
+    left: 50%;
+    top: 10%;
+    text-align: center;
+    animation: scale 1.5s ease-in-out forwards infinite;
+}
+
+.title span {
+    font-size: 6rem;
+    font-family: 'Rancho', cursive;
+    font-weight: 1000;
+    color: white;
+    line-height: 7rem;
+    letter-spacing: 0.5rem;
+    text-shadow: -5px -5px 0 #3D2E62, 5px -5px 0 #3D2E62, -5px 5px 0 #3D2E62, 5px 5px 0 #3D2E62;
+}
+
+@keyframes scale {
+    0% {
+        transform: translate(-50%) scale(1);
+    }
+    50% {
+        transform: translate(-50%) scale(1.1);
+    }
+    100% {
+        transform: translate(-50%) scale(1);
+    }
+}
+
+.play-button {
+    position: absolute;
+    left: 50%;
+    bottom: 20%;
+    height: 9rem;
+    width: 9rem;
+    border-radius: 50%;
+    background-color: white;
+    animation: scale 1.5s ease-in-out forwards infinite;
+    box-shadow: inset 0px 0px 0px 10px #d3c5f7;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.play-button span {
+    position: absolute;
+    font-size: 4rem;
+    color: #2e4462;
+    left: 55%;
+    top: 52%;
+    transform: translate(-50%, -50%);
+}
+
+/* Knight Sprite Sheet */
+
+.knight {
+    width: 212.549px;
+    overflow: hidden;
+    position: absolute;
+    bottom: 0rem;
+    left: 8rem;
+    /* background-color: red; */
+}
+
+.knight img {
+    height: 16rem;
+    animation: movesprite 1s steps(10) infinite;
+}
+
+@keyframes movesprite {
+    from {
+        transform: translate3d(0px, 0, 0);
+    }
+    to {
+        transform: translate3d(-100%, 0, 0);
+    }
+}
+
+/* Zombie Sprite sheet */
+
+.zombie {
+    width: 212.1px;
+    display: block;
+    overflow: hidden;
+    position: absolute;
+    bottom: 0.5rem;
+    right: 11rem;
+    /* background-color: red; */
+}
+
+.zombie img {
+    height: 16rem;
+    animation: movesprite 1s steps(15) infinite;
+}
+
+/* Choose operator */
+
+.choose-operator {
+    position: absolute;
+    left: 50%;
+    top: 10%;
+    width: 60%;
+    display: none;
+}
+
+.choose-operator span {
+    font-size: 3rem;
+    line-height: 3rem;
+    letter-spacing: 0.5rem;
+    text-shadow: -2px -2px 0 #3D2E62, 2px -2px 0 #3D2E62, -2px 2px 0 #3D2E62, 2px 2px 0 #3D2E62;
+}
+
+/* Operators */
+
+.grid {
+    display: grid;
+    place-items: center center;
+}
+
+.operators {
+    height: 250px;
+    width: 400px;
+    position: absolute;
+    left: 50%;
+    top: 68%;
+    transform: translate(-50%, -50%);
+    display: none;
+     grid-template-rows: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.operator {
+    height: 100px;
+    width: 100px;
+    background-color: black;
+    border: 5px solid #3D2E62;
+    cursor: pointer;
+    color: white;
+    display: flex;
+    font-family: 'Rancho', cursive;
+    font-size: 4.225rem;
+    font-weight: 500;
+    justify-content: center;
+    align-items: center;
+}
+
+.row2 {
+    display: flex;
+    grid-column: 1 / span 3;
+}
+
+.row2 div {
+    margin: 0 10px;
+}
+
+.mixed {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 50px);
+    place-items: center center;
+}
+
+.mixed h1  {
+    font-size: 5rem;
+}
+
+/* Question Box */
+
+.question-box {
+    position: absolute;
+    display: none;
+    height: 100px;
+    width: 400px;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%,0);
+    background-color: black;
+    border: 5px solid #3D2E62;
+}
+
+.question-box h1 {
+    position: absolute;
+    margin: 0;
+    top: 50%;
+    transform: translate(0, -50%);
+    width: 100%;
+    text-align: center;
+    font-family: 'Rancho', cursive;
+    font-size: 4rem;
+    color: white;
+}
+
+/* Options */
+
+.options {
+    height: 250px;
+    width: 300px;
+    position: absolute;
+    display: none;
+    left: 50%;
+    top: 68%;
+    transform: translate(-50%, -50%);
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.option {
+    height: 100px;
+    width: 100px;
+    background-color: black;
+    border: 5px solid #3D2E62;
+    cursor: pointer;
+    color: white;
+    display: flex;
+    font-family: 'Rancho', cursive;
+    font-size: 2.5rem;
+    font-weight: 500;
+    justify-content: center;
+    align-items: center;
+}
