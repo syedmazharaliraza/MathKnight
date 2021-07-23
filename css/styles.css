@@ -159,12 +159,53 @@ body, html {
     animation: movesprite 1s steps(10) infinite;
 }
 
+.sprite {
+    animation: movesprite 1s steps(10) infinite;
+}
+
 @keyframes movesprite {
     from {
         transform: translate3d(0px, 0, 0);
     }
     to {
         transform: translate3d(-100%, 0, 0);
+    }
+}
+
+.display-none {
+    display: none;
+}
+
+.run {
+    left: 8rem;
+    animation: knightrun 1.75s linear forwards;
+}
+
+@keyframes knightrun {
+    from {
+        left: 8rem;
+    }
+    to {
+        left: 41rem;
+    }
+}
+
+.attack {
+    animation: knightattack 0.75s linear forwards;
+    z-index: 50;
+}
+
+.attack img {
+    left: 41rem;
+    animation: movesprite 0.75s steps(10) forwards;
+}
+
+@keyframes knightattack {
+    from {
+        left: 41rem;
+    }
+    to {
+        left: 51rem;
     }
 }
 
@@ -177,7 +218,7 @@ body, html {
     position: absolute;
     bottom: 0.5rem;
     right: 11rem;
-    /* background-color: red; */
+    z-index: 0;
 }
 
 .zombie img {
@@ -217,7 +258,7 @@ body, html {
     top: 68%;
     transform: translate(-50%, -50%);
     display: none;
-     grid-template-rows: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
     grid-template-columns: repeat(3, 1fr);
 }
 
@@ -252,7 +293,7 @@ body, html {
     place-items: center center;
 }
 
-.mixed h1  {
+.mixed h1 {
     font-size: 5rem;
 }
 
@@ -265,7 +306,7 @@ body, html {
     width: 400px;
     top: 10%;
     left: 50%;
-    transform: translate(-50%,0);
+    transform: translate(-50%, 0);
     background-color: black;
     border: 5px solid #3D2E62;
 }
@@ -294,6 +335,7 @@ body, html {
     transform: translate(-50%, -50%);
     grid-template-rows: repeat(2, 1fr);
     grid-template-columns: repeat(2, 1fr);
+    z-index: 90;
 }
 
 .option {
@@ -305,7 +347,7 @@ body, html {
     color: white;
     display: flex;
     font-family: 'Rancho', cursive;
-    font-size: 2.5rem;
+    font-size: 2rem;
     font-weight: 500;
     justify-content: center;
     align-items: center;
