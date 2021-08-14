@@ -58,9 +58,7 @@ let deadzombie = document.querySelector('.deadzombie');
 let walkzombie = document.querySelector('.walkzombie');
 let attackzombie = document.querySelector('.attackzombie');
 
-// Showing menu when backarrow is clicked
 let backArrow = document.querySelector('.backarrow');
-backArrow.addEventListener("click", openChooseOperator);
 
 function closeChooseOperator() {
     chooseOperator.style.display = "none";
@@ -105,6 +103,7 @@ function killzombie() {
         deadzombie.classList.remove("display-none");
     }, 2200);
 };
+
 function killknight() {
     options.style.display = "none";
     question.style.color = "red";
@@ -134,6 +133,7 @@ function resetcorrect() {
         backArrow.style.display = "block";
     }, 3200);
 }
+
 function resetincorrect() {
     setTimeout(() => {
         question.style.color = "white";
@@ -185,6 +185,15 @@ function showAddQuestion() {
             optionarray[i].addEventListener('click', incorrectAdd);
         }
         answer.addEventListener('click', correctAdd);
+
+
+        backArrow.addEventListener("click", () => {
+            answer.removeEventListener('click', correctAdd);
+            for (var i = 0; i < 3; i++) {
+                optionarray[i].removeEventListener('click', incorrectAdd);
+            }
+            openChooseOperator();
+        });
 
         function correctAdd() {
             answer.removeEventListener('click', correctAdd);
@@ -250,6 +259,15 @@ function showSubtractQuestion() {
             }
             answer.addEventListener('click', correctSubtract);
 
+
+            backArrow.addEventListener("click", () => {
+                answer.removeEventListener('click', correctSubtract);
+                for (var i = 0; i < 3; i++) {
+                    optionarray[i].removeEventListener('click', incorrectSubtract);
+                }
+                openChooseOperator();
+            });
+
             function correctSubtract() {
                 answer.removeEventListener('click', correctSubtract);
                 for (var i = 0; i < 3; i++) {
@@ -314,6 +332,14 @@ function showMultiplyQuestion() {
         }
         answer.addEventListener('click', correctMultiply);
 
+        backArrow.addEventListener("click", () => {
+            answer.removeEventListener('click', correctMultiply);
+            for (var i = 0; i < 3; i++) {
+                optionarray[i].removeEventListener('click', incorrectMultiply);
+            }
+            openChooseOperator();
+        });
+
         function correctMultiply() {
             answer.removeEventListener('click', correctMultiply);
             for (var i = 0; i < 3; i++) {
@@ -376,6 +402,15 @@ function showDivideQuestion() {
                 optionarray[i].addEventListener('click', incorrectDivide);
             }
             answer.addEventListener('click', correctDivide);
+
+            backArrow.addEventListener("click", () => {
+                answer.removeEventListener('click', correctDivide);
+                for (var i = 0; i < 3; i++) {
+                    optionarray[i].removeEventListener('click', incorrectDivide);
+                }
+                openChooseOperator();
+            });
+
             function correctDivide() {
                 answer.removeEventListener('click', correctDivide);
                 for (var i = 0; i < 3; i++) {
@@ -415,7 +450,6 @@ mixed.addEventListener("click", function () {
 
 function showMixedQuestion() {
     function displayMixed() {
-        let randomOperator = ["+", "-", "*", "/"];
         let r4 = Math.floor(Math.random() * 4);
         let randomoption1 = randomNumber200();
         let randomoption2 = randomNumber200();
@@ -496,6 +530,14 @@ function showMixedQuestion() {
             optionarray[i].addEventListener('click', incorrectMixed);
         }
         answer.addEventListener('click', correctMixed);
+        
+        backArrow.addEventListener("click", () => {
+            answer.removeEventListener('click', correctMixed);
+            for (var i = 0; i < 3; i++) {
+                optionarray[i].removeEventListener('click', incorrectMixed);
+            }
+            openChooseOperator();
+        });
 
         function correctMixed() {
             answer.removeEventListener('click', correctMixed);
