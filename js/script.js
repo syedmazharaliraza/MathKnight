@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', (e) => {
     let splash = document.querySelector('.splash-screen');
     setTimeout(() => {
         splash.style.display = "none";
-    }, 10000);
+    }, 5000);
 });
 
 // Starting game on clicking play button
@@ -50,13 +50,24 @@ let options = document.querySelector(".options");
 let stillknight = document.querySelector('.stillknight');
 let runknight = document.querySelector('.runknight');
 let attackknight = document.querySelector('.attackknight');
+let deadknight = document.querySelector('.deadknight');
 
+
+let zombie = document.querySelector('.zombie');
+let deadzombie = document.querySelector('.deadzombie');
+let walkzombie = document.querySelector('.walkzombie');
+let attackzombie = document.querySelector('.attackzombie');
+
+// Showing menu when backarrow is clicked
+let backArrow = document.querySelector('.backarrow');
+backArrow.addEventListener("click", openChooseOperator);
 
 function closeChooseOperator() {
     chooseOperator.style.display = "none";
     operators.style.display = "none";
     questionBox.style.display = "block";
     options.style.display = "grid";
+    backArrow.style.display = "block";
 };
 
 function openChooseOperator() {
@@ -64,6 +75,7 @@ function openChooseOperator() {
     operators.style.display = "grid";
     questionBox.style.display = "none";
     options.style.display = "none";
+    backArrow.style.display = "none";
 }
 
 function randomNumber150() {
@@ -76,7 +88,64 @@ function randomNumber200() {
     return Math.floor(Math.random() * 200);
 }
 
-let counter = 0;
+function killzombie() {
+    options.style.display = "none";
+    question.style.color = "#00ff00";
+    question.textContent = "Correct !";
+    stillknight.classList.add("display-none");
+    runknight.classList.remove("display-none");
+    runknight.classList.add("run");
+    backArrow.style.display = "none";
+    setTimeout(() => {
+        runknight.classList.add("display-none");
+        attackknight.classList.remove("display-none");
+    }, 1750);
+    setTimeout(() => {
+        zombie.classList.add("display-none");
+        deadzombie.classList.remove("display-none");
+    }, 2200);
+};
+function killknight() {
+    options.style.display = "none";
+    question.style.color = "red";
+    question.textContent = "Incorrect !";
+    zombie.classList.add("display-none");
+    walkzombie.classList.remove("display-none");
+    walkzombie.classList.add("walk");
+    backArrow.style.display = "none";
+    setTimeout(() => {
+        walkzombie.classList.add("display-none");
+        attackzombie.classList.remove("display-none");
+    }, 3000);
+    setTimeout(() => {
+        stillknight.classList.add("display-none");
+        deadknight.classList.remove("display-none");
+    }, 3300);
+};
+
+function resetcorrect() {
+    setTimeout(() => {
+        question.style.color = "white";
+        options.style.display = "grid";
+        deadzombie.classList.add("display-none");
+        attackknight.classList.add("display-none");
+        stillknight.classList.remove("display-none");
+        zombie.classList.remove("display-none");
+        backArrow.style.display = "block";
+    }, 3200);
+}
+function resetincorrect() {
+    setTimeout(() => {
+        question.style.color = "white";
+        options.style.display = "grid";
+        deadknight.classList.add("display-none");
+        attackzombie.classList.add("display-none");
+        stillknight.classList.remove("display-none");
+        zombie.classList.remove("display-none");
+        backArrow.style.display = "block";
+    }, 4300);
+}
+
 
 // If addition is chosed
 
@@ -96,13 +165,9 @@ function showAddQuestion() {
         let randomoption2 = randomNumber150(); // 0 to 150
         let randomoption3 = randomNumber150(); // 0 to 150
         let randomoption4 = randomNumber150(); // 0 to 150
-        let randomanswerbox = Math.floor(Math.random() * 4); // 0 to 3 
+        let random4 = Math.floor(Math.random() * 4); // 0 to 3 
         let optionarray = [option1, option2, option3, option4];
-        for (let i = 0; i < 4; i++) {
-            optionarray[i].removeEventListener('click', displayAdd);
-        }
-        globalAdd = undefined;
-        let answer = optionarray[randomanswerbox];
+        let answer = optionarray[random4];
         let randomNumber1 = Math.floor(Math.random() * 100);
         let randomNumber2 = Math.floor(Math.random() * 90 + 10);
         question.textContent = randomNumber1 + " + " + randomNumber2 + " = ? ";
@@ -111,14 +176,43 @@ function showAddQuestion() {
         option3.textContent = randomoption3;
         option4.textContent = randomoption4;
         answer.textContent = randomNumber1 + randomNumber2;
-        globalAdd = answer;
-        answer.addEventListener('click', displayAdd);
-        if (counter > 0) {
-            answer.removeEventListener('click', displayAdd);
+        for (var i = 0; i < 4; i++) {
+            if (optionarray[i] === answer) {
+                optionarray.splice(i, 1);
+            }
         }
+        for (var i = 0; i < 3; i++) {
+            optionarray[i].addEventListener('click', incorrectAdd);
+        }
+        answer.addEventListener('click', correctAdd);
+
+        function correctAdd() {
+            answer.removeEventListener('click', correctAdd);
+            for (var i = 0; i < 3; i++) {
+                optionarray[i].removeEventListener('click', incorrectAdd);
+            }
+            killzombie();
+            resetcorrect();
+            setTimeout(() => {
+                return displayAdd();
+            }, 3200);
+        };
+        function incorrectAdd() {
+            answer.removeEventListener('click', correctAdd);
+            for (var i = 0; i < 3; i++) {
+                optionarray[i].removeEventListener('click', incorrectAdd);
+            }
+            killknight();
+            resetincorrect();
+            setTimeout(() => {
+                return displayAdd();
+            }, 4300);
+        };
+
     }
     displayAdd();
 };
+
 
 
 // If subtraction is chosed
@@ -134,26 +228,53 @@ function showSubtractQuestion() {
         let randomoption2 = randomNumber100();
         let randomoption3 = randomNumber100();
         let randomoption4 = randomNumber100();
-        let randomanswerbox = Math.floor(Math.random() * 4);
+        let random4 = Math.floor(Math.random() * 4);
         let optionarray = [option1, option2, option3, option4];
-        for (let i = 0; i < 4; i++) {
-            optionarray[i].removeEventListener('click', displaySubtract);
-        }
-        globalSubtract = undefined;
-        let answer = optionarray[randomanswerbox];
+        let answer = optionarray[random4];
         let randomNumber1 = Math.floor(Math.random() * 100);
         let randomNumber2 = Math.floor(Math.random() * 90 + 10);
-        question.textContent = randomNumber1 + " - " + randomNumber2 + " = ? ";
-        option1.textContent = randomoption1;
-        option2.textContent = randomoption2;
-        option3.textContent = randomoption3;
-        option4.textContent = randomoption4;
-        answer.textContent = randomNumber1 - randomNumber2;
-        globalSubtract = answer;
-        answer.addEventListener('click', displaySubtract);
-        if (counter > 0) {
-            answer.removeEventListener('click', displaySubtract);
+        if (randomNumber2 <= randomNumber1) {
+            question.textContent = randomNumber1 + " - " + randomNumber2 + " = ? ";
+            option1.textContent = randomoption1;
+            option2.textContent = randomoption2;
+            option3.textContent = randomoption3;
+            option4.textContent = randomoption4;
+            answer.textContent = randomNumber1 - randomNumber2;
+            for (var i = 0; i < 4; i++) {
+                if (optionarray[i] === answer) {
+                    optionarray.splice(i, 1);
+                }
+            }
+            for (var i = 0; i < 3; i++) {
+                optionarray[i].addEventListener('click', incorrectSubtract);
+            }
+            answer.addEventListener('click', correctSubtract);
+
+            function correctSubtract() {
+                answer.removeEventListener('click', correctSubtract);
+                for (var i = 0; i < 3; i++) {
+                    optionarray[i].removeEventListener('click', incorrectSubtract);
+                }
+                killzombie();
+                resetcorrect();
+                setTimeout(() => {
+                    return displaySubtract();
+                }, 3200);
+            };
+            function incorrectSubtract() {
+                answer.removeEventListener('click', correctSubtract);
+                for (var i = 0; i < 3; i++) {
+                    optionarray[i].removeEventListener('click', incorrectSubtract);
+                }
+                killknight();
+                resetincorrect();
+                setTimeout(() => {
+                    return displaySubtract();
+                }, 4300);
+            };
         }
+        else displaySubtract();
+
     }
     displaySubtract();
 }
@@ -171,13 +292,10 @@ function showMultiplyQuestion() {
         let randomoption2 = randomNumber200();
         let randomoption3 = randomNumber200();
         let randomoption4 = randomNumber200();
-        let randomanswerbox = Math.floor(Math.random() * 4);
+        let random4 = Math.floor(Math.random() * 4);
         let optionarray = [option1, option2, option3, option4];
-        for (let i = 0; i < 4; i++) {
-            optionarray[i].removeEventListener('click', displayMultiply);
-        }
         globalMultiply = undefined;
-        let answer = optionarray[randomanswerbox];
+        let answer = optionarray[random4];
         let randomNumber1 = Math.floor(Math.random() * 21);
         let randomNumber2 = Math.floor(Math.random() * 11);
         question.textContent = randomNumber1 + " x " + randomNumber2 + " = ? ";
@@ -186,14 +304,41 @@ function showMultiplyQuestion() {
         option3.textContent = randomoption3;
         option4.textContent = randomoption4;
         answer.textContent = randomNumber1 * randomNumber2;
-        globalMultiply = answer;
-        answer.addEventListener('click', displayMultiply);
-        if (counter > 0) {
-            answer.removeEventListener('click', displayMultiply);
+        for (var i = 0; i < 4; i++) {
+            if (optionarray[i] === answer) {
+                optionarray.splice(i, 1);
+            }
         }
+        for (var i = 0; i < 3; i++) {
+            optionarray[i].addEventListener('click', incorrectMultiply);
+        }
+        answer.addEventListener('click', correctMultiply);
+
+        function correctMultiply() {
+            answer.removeEventListener('click', correctMultiply);
+            for (var i = 0; i < 3; i++) {
+                optionarray[i].removeEventListener('click', incorrectMultiply);
+            }
+            killzombie();
+            resetcorrect();
+            setTimeout(() => {
+                return displayMultiply();
+            }, 3200);
+        };
+        function incorrectMultiply() {
+            answer.removeEventListener('click', correctMultiply);
+            for (var i = 0; i < 3; i++) {
+                optionarray[i].removeEventListener('click', incorrectMultiply);
+            }
+            killknight();
+            resetincorrect();
+            setTimeout(() => {
+                return displayMultiply();
+            }, 4300);
+        };
     }
     displayMultiply();
-    
+
 }
 
 // If divide is chosed
@@ -210,13 +355,9 @@ function showDivideQuestion() {
         let randomoption2 = randomNumber200();
         let randomoption3 = randomNumber200();
         let randomoption4 = randomNumber200();
-        let randomanswerbox = Math.floor(Math.random() * 4);
+        let random4 = Math.floor(Math.random() * 4);
         let optionarray = [option1, option2, option3, option4];
-        for (let i = 0; i < 4; i++) {
-            optionarray[i].removeEventListener('click', displayDivide);
-        }
-        globalDivide = undefined;
-        let answer = optionarray[randomanswerbox];
+        let answer = optionarray[random4];
         let randomNumber1 = Math.floor(Math.random() * 100);
         let randomNumber2 = Math.floor(Math.random() * 51);
         if (randomNumber2 <= (randomNumber1) / 2 && randomNumber1 % randomNumber2 == 0) {
@@ -226,13 +367,39 @@ function showDivideQuestion() {
             option3.textContent = randomoption3;
             option4.textContent = randomoption4;
             answer.textContent = randomNumber1 / randomNumber2;
+            for (var i = 0; i < 4; i++) {
+                if (optionarray[i] === answer) {
+                    optionarray.splice(i, 1);
+                }
+            }
+            for (var i = 0; i < 3; i++) {
+                optionarray[i].addEventListener('click', incorrectDivide);
+            }
+            answer.addEventListener('click', correctDivide);
+            function correctDivide() {
+                answer.removeEventListener('click', correctDivide);
+                for (var i = 0; i < 3; i++) {
+                    optionarray[i].removeEventListener('click', incorrectDivide);
+                }
+                killzombie();
+                resetcorrect();
+                setTimeout(() => {
+                    return displayDivide();
+                }, 3200);
+            };
+            function incorrectDivide() {
+                answer.removeEventListener('click', correctDivide);
+                for (var i = 0; i < 3; i++) {
+                    optionarray[i].removeEventListener('click', incorrectDivide);
+                }
+                killknight();
+                resetincorrect();
+                setTimeout(() => {
+                    return displayDivide();
+                }, 4300);
+            };
         }
         else displayDivide();
-        globalDivide = answer;
-        answer.addEventListener('click', displayDivide);
-        if (counter > 0) {
-            answer.removeEventListener('click', displayDivide);
-        }
     }
     displayDivide();
 }
@@ -241,7 +408,6 @@ function showDivideQuestion() {
 // If mixed is chosed
 
 mixed.addEventListener("click", function () {
-    counter++;
     closeChooseOperator();
     showMixedQuestion();
 });
@@ -249,13 +415,111 @@ mixed.addEventListener("click", function () {
 
 function showMixedQuestion() {
     function displayMixed() {
-        let randomOperator = [showAddQuestion, showSubtractQuestion, showMultiplyQuestion, showDivideQuestion];
+        let randomOperator = ["+", "-", "*", "/"];
+        let r4 = Math.floor(Math.random() * 4);
+        let randomoption1 = randomNumber200();
+        let randomoption2 = randomNumber200();
+        let randomoption3 = randomNumber200();
+        let randomoption4 = randomNumber200();
         let random4 = Math.floor(Math.random() * 4);
-        randomOperator[random4]();
-        globalAdd.addEventListener('click',displayMixed);
-        globalSubtract.addEventListener('click',displayMixed);
-        globalMultiply.addEventListener('click',displayMixed);
-        globalAdd.addEventListener('click',displayMixed);
+        let optionarray = [option1, option2, option3, option4];
+        let answer = optionarray[random4];
+        console.log(random4);
+        switch (r4) {
+            case 0:
+                {
+                    let randomNumber1 = Math.floor(Math.random() * 100);
+                    let randomNumber2 = Math.floor(Math.random() * 99);
+                    question.textContent = randomNumber1 + " + " + randomNumber2 + " = ? ";
+                    option1.textContent = randomoption1;
+                    option2.textContent = randomoption2;
+                    option3.textContent = randomoption3;
+                    option4.textContent = randomoption4;
+                    answer.textContent = randomNumber1 + randomNumber2;
+                }
+                break;
+            case 1:
+                {
+                    function subtract() {
+                        let randomNumber3 = Math.floor(Math.random() * 100);
+                        let randomNumber4 = Math.floor(Math.random() * 99);
+                        if (randomNumber4 <= randomNumber3) {
+                            question.textContent = randomNumber3 + " - " + randomNumber4 + " = ? ";
+                            option1.textContent = randomoption1;
+                            option2.textContent = randomoption2;
+                            option3.textContent = randomoption3;
+                            option4.textContent = randomoption4;
+                            answer.textContent = randomNumber3 - randomNumber4;
+                        }
+                        else subtract();
+                    }
+                    subtract();
+                }
+                break;
+            case 2:
+                {
+                    let randomNumber5 = Math.floor(Math.random() * 21);
+                    let randomNumber6 = Math.floor(Math.random() * 11);
+                    question.textContent = randomNumber5 + " * " + randomNumber6 + " = ? ";
+                    option1.textContent = randomoption1;
+                    option2.textContent = randomoption2;
+                    option3.textContent = randomoption3;
+                    option4.textContent = randomoption4;
+                    answer.textContent = randomNumber5 * randomNumber6;
+                    break;
+                }
+            case 3:
+                {
+                    function divide() {
+                        let randomNumber7 = Math.floor(Math.random() * 100);
+                        let randomNumber8 = Math.floor(Math.random() * 51);
+                        if (randomNumber8 <= (randomNumber7) / 2 && randomNumber7 % randomNumber8 == 0) {
+                            question.textContent = randomNumber7 + "/" + randomNumber8 + " = ? ";
+                            option1.textContent = randomoption1;
+                            option2.textContent = randomoption2;
+                            option3.textContent = randomoption3;
+                            option4.textContent = randomoption4;
+                            answer.textContent = randomNumber7 / randomNumber8;
+                        }
+                        else divide();
+                    }
+                    divide();
+                    break;
+                }
+        }
+        for (var i = 0; i < 4; i++) {
+            if (optionarray[i] === answer) {
+                optionarray.splice(i, 1);
+            }
+        }
+        for (var i = 0; i < 3; i++) {
+            optionarray[i].addEventListener('click', incorrectMixed);
+        }
+        answer.addEventListener('click', correctMixed);
+
+        function correctMixed() {
+            answer.removeEventListener('click', correctMixed);
+            for (var i = 0; i < 3; i++) {
+                optionarray[i].removeEventListener('click', incorrectMixed);
+            }
+            killzombie();
+            resetcorrect();
+            setTimeout(() => {
+                return displayMixed();
+            }, 3200);
+        };
+        function incorrectMixed() {
+            answer.removeEventListener('click', correctMixed);
+            for (var i = 0; i < 3; i++) {
+                optionarray[i].removeEventListener('click', incorrectMixed);
+            }
+            killknight();
+            resetincorrect();
+            setTimeout(() => {
+                return displayMixed();
+            }, 4300);
+        };
+
     }
     displayMixed();
-}
+};
