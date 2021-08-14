@@ -194,7 +194,7 @@ function showAddQuestion() {
             killzombie();
             resetcorrect();
             setTimeout(() => {
-                return displayAdd();
+                displayAdd();
             }, 3200);
         };
         function incorrectAdd() {
@@ -205,7 +205,7 @@ function showAddQuestion() {
             killknight();
             resetincorrect();
             setTimeout(() => {
-                return displayAdd();
+                displayAdd();
             }, 4300);
         };
 
@@ -258,7 +258,7 @@ function showSubtractQuestion() {
                 killzombie();
                 resetcorrect();
                 setTimeout(() => {
-                    return displaySubtract();
+                    displaySubtract();
                 }, 3200);
             };
             function incorrectSubtract() {
@@ -269,7 +269,7 @@ function showSubtractQuestion() {
                 killknight();
                 resetincorrect();
                 setTimeout(() => {
-                    return displaySubtract();
+                    displaySubtract();
                 }, 4300);
             };
         }
@@ -322,7 +322,7 @@ function showMultiplyQuestion() {
             killzombie();
             resetcorrect();
             setTimeout(() => {
-                return displayMultiply();
+                displayMultiply();
             }, 3200);
         };
         function incorrectMultiply() {
@@ -333,7 +333,7 @@ function showMultiplyQuestion() {
             killknight();
             resetincorrect();
             setTimeout(() => {
-                return displayMultiply();
+                displayMultiply();
             }, 4300);
         };
     }
@@ -384,7 +384,7 @@ function showDivideQuestion() {
                 killzombie();
                 resetcorrect();
                 setTimeout(() => {
-                    return displayDivide();
+                    displayDivide();
                 }, 3200);
             };
             function incorrectDivide() {
@@ -395,7 +395,7 @@ function showDivideQuestion() {
                 killknight();
                 resetincorrect();
                 setTimeout(() => {
-                    return displayDivide();
+                    displayDivide();
                 }, 4300);
             };
         }
@@ -505,7 +505,7 @@ function showMixedQuestion() {
             killzombie();
             resetcorrect();
             setTimeout(() => {
-                return displayMixed();
+                displayMixed();
             }, 3200);
         };
         function incorrectMixed() {
@@ -516,7 +516,7 @@ function showMixedQuestion() {
             killknight();
             resetincorrect();
             setTimeout(() => {
-                return displayMixed();
+                displayMixed();
             }, 4300);
         };
 
