@@ -6,31 +6,13 @@ document.addEventListener('DOMContentLoaded', (e) => {
     }, 5000);
 });
 
-// Starting game on clicking play button
 let playButton = document.querySelector('.play-button');
 playButton.addEventListener("click", closeStartGame);
 
-// Choose mathematical operations window
 let chooseOperator = document.querySelector('.choose-operator');
 let operators = document.querySelector('.operators');
 let title = document.querySelector('.title');
 
-function closeStartGame() {
-    playButton.style.display = 'none';
-    title.style.display = 'none';
-    chooseOperator.style.display = 'block';
-    operators.style.display = 'grid';
-
-};
-
-function openStartGame() {
-    playButton.style.display = 'block';
-    title.style.display = 'block';
-    chooseOperator.style.display = 'none';
-    operators.style.display = 'none';
-}
-
-// When operator is clicked
 
 let option1 = document.querySelector(".option1");
 let option2 = document.querySelector(".option2");
@@ -58,7 +40,30 @@ let deadzombie = document.querySelector('.deadzombie');
 let walkzombie = document.querySelector('.walkzombie');
 let attackzombie = document.querySelector('.attackzombie');
 
+let zombiehit = new Audio('sounds/zombiehit.mp3');
+let knighthit = new Audio('sounds/knighthit.mp3');
+let bgmusic = document.getElementById("bgmusic");
+
+document.addEventListener('click', function() {
+    bgmusic.play();
+});
+
 let backArrow = document.querySelector('.backarrow');
+
+function closeStartGame() {
+    playButton.style.display = 'none';
+    title.style.display = 'none';
+    chooseOperator.style.display = 'block';
+    operators.style.display = 'grid';
+
+};
+
+function openStartGame() {
+    playButton.style.display = 'block';
+    title.style.display = 'block';
+    chooseOperator.style.display = 'none';
+    operators.style.display = 'none';
+}
 
 function closeChooseOperator() {
     chooseOperator.style.display = "none";
@@ -99,6 +104,9 @@ function killzombie() {
         attackknight.classList.remove("display-none");
     }, 1750);
     setTimeout(() => {
+        knighthit.play();
+    }, 2000);
+    setTimeout(() => {
         zombie.classList.add("display-none");
         deadzombie.classList.remove("display-none");
     }, 2200);
@@ -116,6 +124,9 @@ function killknight() {
         walkzombie.classList.add("display-none");
         attackzombie.classList.remove("display-none");
     }, 3000);
+    setTimeout(() => {
+        zombiehit.play();
+    }, 3200);
     setTimeout(() => {
         stillknight.classList.add("display-none");
         deadknight.classList.remove("display-none");
@@ -530,7 +541,7 @@ function showMixedQuestion() {
             optionarray[i].addEventListener('click', incorrectMixed);
         }
         answer.addEventListener('click', correctMixed);
-        
+
         backArrow.addEventListener("click", () => {
             answer.removeEventListener('click', correctMixed);
             for (var i = 0; i < 3; i++) {
