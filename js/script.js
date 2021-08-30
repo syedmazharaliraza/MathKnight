@@ -81,15 +81,10 @@ function openChooseOperator() {
     backArrow.style.display = "none";
 }
 
-function randomNumber150() {
-    return Math.floor(Math.random() * 150);
-}
-function randomNumber100() {
-    return Math.floor(Math.random() * 100);
-}
-function randomNumber200() {
-    return Math.floor(Math.random() * 200);
-}
+let randomNumber150 = () =>  Math.floor(Math.random() * 150);
+let randomNumber100 = () =>  Math.floor(Math.random() * 100);
+let randomNumber200 = () =>  Math.floor(Math.random() * 200);
+
 
 function killzombie() {
     options.style.display = "none";
