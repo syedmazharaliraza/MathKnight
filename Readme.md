@@ -1,2 +1,10 @@
-Math Knight is a fantasy themed mathematical operations game build on pure HTML, CSS and Javascript. This game focuses on basic mathematical calculations which helps in sharpening young minds.
-<img src="images/ss1.jpg">
+# Math Knight
+Math Knight is a fantasy themed mathematical operations game build on pure HTML, CSS and Javascript. This game focuses on basic mathematical calculations which helps in sharpening young minds.<br>
+The player has to choose from 5 modes: Addition, Subtraction, Multiplication, Division or a combination of all arithmetic operations. The player then needs to solve an infinite number of equations correctly. To make the game interesting and fantasy-driven, for each round of questions, if the player answers a question correctly, the knight runs towards the zombie and stabs him. On choosing the wrong option, the zombie walks towards the knight and attacks him. The player then moves to the next question.<br>
+### Play game: https://themathknight.netlify.app/
+<hr>
+<img src="Images/ss1.PNG">
+<img src="Images/ss2.PNG">
+<img src="Images/ss3.PNG">
+<img src="Images/ss4.PNG">
+<img src="Images/ss5.PNG">
