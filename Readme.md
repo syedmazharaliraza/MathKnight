@@ -8,7 +8,7 @@ The player has to choose from 5 modes: Addition, Subtraction, Multiplication, Di
 ### Play game: https://themathknight.netlify.app/
 
 ## Contributing Guidelines
-Do you want to add a new feature to our project? Did you experience a bug while going through the project? Please go through our [contribution Guidlines](Contributing.md) and feel to free to contribute to MathKnight.
+Do you want to add a new feature 💡 to our project? Did you experience a bug 🐛 while going through the project? Please go through our [contribution Guidlines](Contributing.md) and feel free to contribute ✨ to MathKnight.
 
 ## Screenshots:
 
