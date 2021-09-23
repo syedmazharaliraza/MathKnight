@@ -6,7 +6,7 @@ This documentation contains a set of guidelines to help you during the contribut
 
 ## Code of Conduct
 
-Make sure to read it here: [CODE_OF_CONDUCT.md]()
+Make sure to read it here: [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)
 
 
 ## Preliminaries
